@@ -11,9 +11,6 @@ const ItemStyle = css`
   padding: 1rem;
   display: flex;
   align-items: center;
-  &:nth-of-type(even) {
-    background: #f8f9fa;
-  }
 `
 const CheckboxStyle = ({ checked }) => css`
   cursor: pointer;
@@ -50,24 +47,33 @@ const RemoveStyle = css`
   &:hover {
     color: #ff8787;
   }
+`
+
+const TodoListItem_virtualized = css`
+  &:nth-of-type(even) {
+    background: #f8f9fa;
+  }
+
   & + & {
     border-top: 1px solid #dee2e6;
   }
 `
 
-const TodoListItem = ({ todo, onRemove, onToggle }) => {
+const TodoListItem = ({ todo, onRemove, onToggle, style }) => {
   const { id, text, checked } = todo
   return (
-    <div css={ItemStyle}>
-      <div css={CheckboxStyle({ checked })}>
-        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+    <div css={TodoListItem_virtualized} style={style}>
+      <div css={ItemStyle}>
+        <div css={CheckboxStyle({ checked })}>
+          {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
 
-        <div className="text" onClick={() => onToggle(id)}>
-          {text}
+          <div className="text" onClick={() => onToggle(id)}>
+            {text}
+          </div>
         </div>
-      </div>
-      <div css={RemoveStyle} onClick={() => onRemove(id)}>
-        <MdRemoveCircleOutline />
+        <div css={RemoveStyle} onClick={() => onRemove(id)}>
+          <MdRemoveCircleOutline />
+        </div>
       </div>
     </div>
   )
