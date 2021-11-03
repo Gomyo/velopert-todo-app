@@ -5,6 +5,7 @@ import {
   MdCheckBox,
   MdRemoveCircleOutline,
 } from 'react-icons/md'
+import React from 'react'
 
 const ItemStyle = css`
   padding: 1rem;
@@ -72,4 +73,4 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
   )
 }
 
-export default TodoListItem
+export default React.memo(TodoListItem)
